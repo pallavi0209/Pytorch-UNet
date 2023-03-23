@@ -5,7 +5,7 @@ from .unet_parts import *
 
 class UNet(nn.Module):
     def __init__(self, n_channels, n_classes, bilinear=False):
-        super(UNet, self).__init__()
+        super(UNet, self).__init__()          #super:Allows us to avoid using the base class name explicitly. Working with Multiple Inheritance.
         self.n_channels = n_channels
         self.n_classes = n_classes
         self.bilinear = bilinear
@@ -33,7 +33,7 @@ class UNet(nn.Module):
         x = self.up3(x, x2)
         x = self.up4(x, x1)
         logits = self.outc(x)
-        return logits
+        return logits             #
 
     def use_checkpointing(self):
         self.inc = torch.utils.checkpoint(self.inc)
